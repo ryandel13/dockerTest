@@ -1,0 +1,24 @@
+version: "3.9"
+services:
+  config:
+    image: config-server
+    ports:
+      - "8081:8081"
+  rabbit-mq:
+    image: rabbitmq
+    ports:
+      - "5672:5672"
+  test-app-a:
+    image: test-app-a
+    depends_on:
+      - config
+      - rabbit-mq
+    ports:
+      - "8080:8080"
+  test-app-b:
+    image: test-app-b
+    depends_on:
+      - config
+      - rabbit-mq
+    ports:
+      - "8082:8082"

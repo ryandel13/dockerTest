@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: test-app-a
+  cloud: 
+    config:
+      uri: http://localhost:81
+
+---
+spring:
+  profiles: docker
+  cloud:
+   config:
+      uri: http://config:8081
+
+---
+spring:
+  profiles: kubernetes
+  cloud:
+   config:
+      uri: http://config:8081

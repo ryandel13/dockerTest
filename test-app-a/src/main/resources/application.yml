@@ -1,0 +1,3 @@
+test-app-a:
+  labels:
+    test-label: Property nicht geladen :(

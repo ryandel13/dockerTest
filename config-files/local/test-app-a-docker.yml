@@ -1,0 +1,3 @@
+test-app-a:
+  labels:
+    test-label: Jetzt werde ich in Docker betrieben

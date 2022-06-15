@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-app
+spec:
+  selector:
+    matchLabels:
+      run: test-app
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: test-app
+    spec:
+      containers:
+        - name: rabbitmq
+          image: rabbitmq:3.10.5
+          ports:
+            - containerPort: 5672
+              protocol: TCP
+        - name: test-app-a
+          image: test-app-a:0.0.1
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: kubernetes
+            - name: JAVA_OPTIONS
+              value: "-Dspring.profiles.active=kubernetes"
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+        - name: test-app-b
+          image: test-app-b:0.0.1
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: kubernetes
+            - name: JAVA_OPTIONS
+              value: "-Dspring.profiles.active=docker"
+          ports:
+            - containerPort: 8082
+              protocol: TCP

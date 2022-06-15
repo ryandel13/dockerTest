@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config
+spec:
+  selector:
+    matchLabels:
+      run: config
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: config
+    spec:
+      containers:
+        - name: config
+          image: config-server:0.0.1
+          ports:
+            - containerPort: 8081
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8081

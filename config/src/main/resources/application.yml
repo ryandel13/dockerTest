@@ -1,0 +1,10 @@
+server.port: 81
+server.context.path: test-app
+spring:
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: file:///C:/users/cassini/sources/dockertest/dockerTest/config-files/local
